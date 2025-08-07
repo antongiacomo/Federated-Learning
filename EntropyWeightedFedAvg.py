@@ -39,7 +39,7 @@ class EntropyWeightedFedAvg(FedAvg):
                 print(f"Warning: No entropy metric received from client {client_proxy}")
             entropy = fit_res.metrics.get("entropy", 1.0)
 
-            weight = 1.0 / (entropy + 1e-8)
+            weight = max(entropy, 1e-8)
 
             parameters_and_entropies.append((
                 fit_res.parameters,
